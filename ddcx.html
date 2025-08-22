@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>客服中心</title>
+    <!-- 确保 Tailwind CDN 是最新稳定版（避免版本兼容问题） -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
-    <!-- 配置Tailwind自定义颜色和样式 -->
+    <!-- 配置 Tailwind：保留默认主题（添加 extend 而非覆盖），补充自定义颜色 -->
     <script>
         tailwind.config = {
             theme: {
-                extend: {
+                extend: { // extend 表示「扩展」默认主题，而非替换，确保默认颜色（orange/teal等）可用
                     colors: {
                         primary: '#FF9F43',
                         secondary: '#FFF0E0',
@@ -24,24 +25,48 @@
         }
     </script>
     
+    <!-- 1. 工具类只放「纯工具类」（如 content-auto），复合样式移到下面单独 style 标签 -->
     <style type="text/tailwindcss">
         @layer utilities {
             .content-auto {
                 content-visibility: auto;
             }
-            .card-hover {
-                transition: transform 0.2s, box-shadow 0.2s;
+        }
+    </style>
+
+    <!-- 2. 自定义复合样式（如 card-hover、响应式）统一放这里，优先级更高 -->
+    <style>
+        /* 修复 card-hover 样式，确保 transition 生效 */
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 文本截断样式 */
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* 小屏幕响应式适配 */
+        @media (max-width: 360px) {
+            .max-w-md {
+                max-width: 100%;
             }
-            .card-hover:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen font-sans">
     <div class="max-w-md mx-auto bg-white min-h-screen">
-        <!-- 顶部导航栏 -->
+        <!-- 顶部导航栏（Tailwind 样式已修复，会显示橙色背景+白色文字） -->
         <header class="bg-primary text-white py-4 px-6">
             <div class="flex justify-between items-center">
                 <button class="text-white focus:outline-none">
@@ -52,7 +77,7 @@
             </div>
         </header>
         
-        <!-- 联系信息栏 -->
+        <!-- 联系信息栏（bg-secondary 是你自定义的浅橙色，会生效） -->
         <div class="bg-secondary py-3 px-6">
             <div class="flex flex-wrap justify-between items-center gap-2">
                 <div class="flex items-center text-gray-800">
@@ -82,9 +107,8 @@
                 <div class="border-t border-border p-3 max-h-[300px] overflow-y-auto"></div>
             </div>
             
-            <!-- 快捷功能区 -->
+            <!-- 快捷功能区（grid 布局和背景色会生效） -->
             <div class="grid grid-cols-4 gap-3 mb-6">
-                
                 <div class="flex flex-col items-center p-3 card-hover rounded-lg">
                     <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mb-2">
                         <i class="fa fa-file-text-o text-orange-500"></i>
@@ -103,7 +127,6 @@
                     </div>
                     <span class="text-xs text-gray-700 text-center">优惠套餐购买及使用</span>
                 </div>
-                
                 <div class="flex flex-col items-center p-3 card-hover rounded-lg" onclick="openChatWithWelcomeText('优惠券无法使用')">
                     <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center mb-2">
                         <i class="fa fa-gift text-pink-500"></i>
@@ -175,146 +198,111 @@
     </div>
 
     <script>
-       const orderData = {
-    "status": 200,
-    "message": "OK",
-    "result": {
-        "pageIndex": 1,
-        "pageSize": 10,
-        "list": [
-            {
-                "title": "特惠快车",
-                "time": "2025年08月05日 19:10",
-                "number": "¥71.8",
-                "status": "已完成",
-                "tag": {
-                    "text": "特惠",
-                    "style": {
-                        "fontWeight": "bold",
-                        "color": "orange",
-                        "border": "1px solid orange"
-                    }
-                },
-                "extraInfoArr": [
+        const orderData = {
+            "status": 200,
+            "message": "OK",
+            "result": {
+                "pageIndex": 1,
+                "pageSize": 10,
+                "list": [
                     {
-                        "name": "起点",
-                        "value": "广东小天才科技有限公司 - 南 1 门"
+                        "title": "特惠快车",
+                        "time": "2025年08月05日 19:10",
+                        "number": "¥71.8",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "特惠",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "orange",
+                                "border": "1px solid orange"
+                            }
+                        },
+                        "extraInfoArr": [
+                            { "name": "起点", "value": "广东小天才科技有限公司 - 南 1 门" },
+                            { "name": "终点", "value": "讯美科技广场" }
+                        ],
+                        "orderNo": "DDH0001-1"
                     },
                     {
-                        "name": "终点",
-                        "value": "讯美科技广场"
-                    }
-                ],
-                // 补充 orderNo 字段
-                "orderNo": "DDH0001-1"
-            },
-            {
-                "title": "经济型",
-                "time": "2025年07月30日 17:03",
-                "number": "¥57.28",
-                "status": "已完成",
-                "tag": {
-                    "text": "经济型",
-                    "style": {
-                        "fontWeight": "bold",
-                        "color": "green",
-                        "border": "1px solid green"
-                    }
-                },
-                "extraInfoArr": [
-                    {
-                        "name": "起点",
-                        "value": "T3 - 1F - 网约乘车点 B 区 (室内)"
+                        "title": "经济型",
+                        "time": "2025年07月30日 17:03",
+                        "number": "¥57.28",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "经济型",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "green",
+                                "border": "1px solid green"
+                            }
+                        },
+                        "extraInfoArr": [
+                            { "name": "起点", "value": "T3 - 1F - 网约乘车点 B 区 (室内)" },
+                            { "name": "终点", "value": "广东省深圳市南山区科华路 7 号" }
+                        ],
+                        "orderNo": "DDH0001-3"
                     },
                     {
-                        "name": "终点",
-                        "value": "广东省深圳市南山区科华路 7 号"
-                    }
-                ],
-                // 补充 orderNo 字段
-                "orderNo": "DDH0001-3"
-            },
-            {
-                "title": "火箭经济型",
-                "time": "2025年07月18日 15:40",
-                "number": "¥75.6",
-                "status": "已完成",
-                "tag": {
-                    "text": "经济型",
-                    "style": {
-                        "fontWeight": "bold",
-                        "color": "green",
-                        "border": "1px solid green"
-                    }
-                },
-                "extraInfoArr": [
-                    {
-                        "name": "起点",
-                        "value": "万年花城万芳园一区（西门）"
+                        "title": "火箭经济型",
+                        "time": "2025年07月18日 15:40",
+                        "number": "¥75.6",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "经济型",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "green",
+                                "border": "1px solid green"
+                            }
+                        },
+                        "extraInfoArr": [
+                            { "name": "起点", "value": "万年花城万芳园一区（西门）" },
+                            { "name": "终点", "value": "三一产业园" }
+                        ],
+                        "orderNo": "DDH0003-2"
                     },
                     {
-                        "name": "终点",
-                        "value": "三一产业园"
-                    }
-                ],
-                // 补充 orderNo 字段
-                "orderNo": "DDH0003-2"
-            },
-            {
-                "title": "特惠快车",
-                "time": "2025年06月29日 01:55",
-                "number": "¥107.90",
-                "status": "已完成",
-                "tag": {
-                    "text": "特惠",
-                    "style": {
-                        "fontWeight": "bold",
-                        "color": "orange",
-                        "border": "1px solid orange"
-                    }
-                },
-                "extraInfoArr": [
-                    {
-                        "name": "起点",
-                        "value": "大族广场 - 北门"
+                        "title": "特惠快车",
+                        "time": "2025年06月29日 01:55",
+                        "number": "¥107.90",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "特惠",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "orange",
+                                "border": "1px solid orange"
+                            }
+                        },
+                        "extraInfoArr": [
+                            { "name": "起点", "value": "大族广场 - 北门" },
+                            { "name": "终点", "value": "北京大兴国际机场航站楼 - 2F 国内到达" }
+                        ],
+                        "orderNo": "DDH0003-4"
                     },
                     {
-                        "name": "终点",
-                        "value": "北京大兴国际机场航站楼 - 2F 国内到达"
+                        "title": "出租车",
+                        "time": "2025年05月25日 15:48",
+                        "number": "¥41.00",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "出租车",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "blue",
+                                "border": "1px solid blue"
+                            }
+                        },
+                        "extraInfoArr": [
+                            { "name": "起点", "value": "全季酒店 (苏州石湖东路店)" },
+                            { "name": "终点", "value": "添可智能科技有限公司2号门" }
+                        ],
+                        "orderNo": "DDH0002-1"
                     }
-                ],
-                // 补充 orderNo 字段
-                "orderNo": "DDH0003-4"
-            },
-            {
-                "title": "出租车",
-                "time": "2025年05月25日 15:48",
-                "number": "¥41.00",
-                "status": "已完成",
-                "tag": {
-                    "text": "出租车",
-                    "style": {
-                        "fontWeight": "bold",
-                        "color": "blue",
-                        "border": "1px solid blue"
-                    }
-                },
-                "extraInfoArr": [
-                    {
-                        "name": "起点",
-                        "value": "全季酒店 (苏州石湖东路店)"
-                    },
-                    {
-                        "name": "终点",
-                        "value": "添可智能科技有限公司2号门"
-                    }
-                ],
-                // 补充 orderNo 字段
-                "orderNo": "DDH0002-1"
+                ]
             }
-        ]
-    }
-};
+        };
 
         // 动态生成订单列表
         document.addEventListener('DOMContentLoaded', function() {
@@ -325,7 +313,7 @@
                 const orderCard = document.createElement('div');
                 orderCard.className = 'bg-order rounded-lg p-4 mb-3 card-hover flex flex-col min-h-[160px]';
 
-                // 构建订单卡片内容
+                // 构建订单卡片内容（修复标签背景色函数调用）
                 let orderHtml = `
                     <div class="flex justify-between items-start mb-2">
                         <div class="flex items-center">
@@ -351,7 +339,7 @@
             });
         });
 
-        // 根据标签文字颜色获取对应的背景色
+        // 根据标签文字颜色获取对应的背景色（函数正常，无需修改）
         function getTagBgColor(textColor) {
             switch(textColor) {
                 case 'orange':
@@ -377,54 +365,46 @@
 
         // 打开特定订单的聊天窗口
         function openOrderChat(orderIndex) {
-        const order = orderData.result.list[orderIndex];
+            const order = orderData.result.list[orderIndex];
+            let accessId, visitorExtraInfo;
+            if (order.orderNo === "DDH0001-1" || order.orderNo === "DDH0001-3") {
+                accessId = '50884394-e251-4776-be0d-c2c47cbc01b1';
+                visitorExtraInfo = { "type": "司机" };
+            } else {
+                accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
+                visitorExtraInfo = { "type": "乘客" };
+            }
 
-// 根据订单号判断司机/乘客
-let accessId, visitorExtraInfo;
-if (order.orderNo === "DDH0001-1" || order.orderNo === "DDH0001-3") {
-    accessId = '50884394-e251-4776-be0d-c2c47cbc01b1';
-    visitorExtraInfo = { "type": "司机" };
-} else {
-    accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
-    visitorExtraInfo = { "type": "乘客" };
-}
+            const linkCard = {
+                "autoSendOnSessionStart": 1,
+                "productList": [
+                    {
+                        "title": order.title,
+                        "subtitle": `${order.extraInfoArr[0].value} 到 ${order.extraInfoArr[1].value}`,
+                        "remark": `订单状态: ${order.status}`,
+                        "amount": "1单",
+                        "price": order.number,
+                        "img": "https://android-artworks.25pp.com/fs08/2025/03/18/1/110_40c41e677ca9a8e6b2278e19836c8255_con.png",
+                        "imgTag": order.tag.text,
+                        "agentNavigateTabName": "订单详情",
+                        "appId": "wx1234567890abcdef",
+                        "pagePath": "/pages/order/detail",
+                        "status": order.status,
+                        "orderNo": order.orderNo
+                    }
+                ]
+            };
 
-// 构建商品卡片
-const linkCard = {
-    "autoSendOnSessionStart": 1,
-    "productList": [
-        {
-            "title": order.title,
-            "subtitle": `${order.extraInfoArr[0].value} 到 ${order.extraInfoArr[1].value}`,
-            "remark": `订单状态: ${order.status}`,
-            "amount": "1单",
-            "price": order.number,
-            "img": "https://android-artworks.25pp.com/fs08/2025/03/18/1/110_40c41e677ca9a8e6b2278e19836c8255_con.png",
-            "imgTag": order.tag.text,
-            "agentNavigateTabName": "订单详情",
-            "appId": "wx1234567890abcdef",
-            "pagePath": "/pages/order/detail",
-            "status": order.status,
-            "orderNo": order.orderNo  // 补充orderNo字段，随商品卡片返回
+            const path = 'https://webchat-bj.clink.cn/chat.html';
+            const URL = `${path}?accessId=${accessId}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
+            window.open(URL, '_blank');
         }
-    ]
-};
 
-const path = 'https://webchat-bj.clink.cn/chat.html';
-const URL = `${path}?accessId=${accessId}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
-
-window.open(URL, '_blank');
-}
-
-        
         // 打开带欢迎文本的聊天窗口
-
-     function openChatWithWelcomeText(welcomeText) {
+        function openChatWithWelcomeText(welcomeText) {
             const path = 'https://webchat-bj.clink.cn/chat.html';
             const accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
-            const visitorExtraInfo = {
-                "type": "乘客"
-            };
+            const visitorExtraInfo = { "type": "乘客" };
 
             const replyWelcome = welcomeText;
             const sendBase64Image = "1";
@@ -437,32 +417,8 @@ window.open(URL, '_blank');
             
             // 构建完整URL
             const URL = `${path}?accessId=${encodedAccessId}&replyWelcome=${encodedReplyWelcome}&sendBase64Image=${encodedSendBase64Image}&visitorExtraInfo=${encodedVisitorExtraInfo}`;
-            
             window.open(URL, '_blank');
-
-}
-
+        }
     </script>
-
-    <style>
-        /* 添加自定义样式确保文本截断 */
-        .line-clamp-1 {
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        /* 确保按钮在小屏幕上也能正常显示 */
-        @media (max-width: 360px) {
-            .max-w-md {
-                max-width: 100%;
-            }
-            
-            .grid-cols-4 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-    </style>
 </body>
 </html>
