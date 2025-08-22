@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客服中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和样式 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF9F43',
+                        secondary: '#FFF0E0',
+                        neutral: '#F8F9FA',
+                        border: '#E0E0E0',
+                        order: '#FFF9F5',
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <div class="max-w-md mx-auto bg-white min-h-screen">
+        <!-- 顶部导航栏 -->
+        <header class="bg-primary text-white py-4 px-6">
+            <div class="flex justify-between items-center">
+                <button class="text-white focus:outline-none">
+                    <i class="fa fa-arrow-left text-xl"></i>
+                </button>
+                <h1 class="text-xl font-medium">客服中心</h1>
+                <div class="w-6"></div>
+            </div>
+        </header>
+        
+        <!-- 联系信息栏 -->
+        <div class="bg-secondary py-3 px-6">
+            <div class="flex flex-wrap justify-between items-center gap-2">
+                <div class="flex items-center text-gray-800">
+                    <i class="fa fa-phone mr-2"></i>
+                    <span>电话 4000000999</span>
+                </div>
+                <div class="flex items-center text-gray-800">
+                    <i class="fa fa-clock-o mr-2"></i>
+                    <span>时间 00:00-24:00</span>
+                </div>
+                <div class="flex items-center text-primary">
+                    <span>服务原则</span>
+                    <i class="fa fa-angle-right ml-1"></i>
+                </div>
+            </div>
+        </div>
+        
+        <main class="p-5 pb-24">
+            <!-- 智能客服和订单咨询区 -->
+            <div class="mb-6 border border-border rounded-lg overflow-hidden bg-white">
+                <div class="p-4 flex items-start">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fa fa-comments text-primary text-xl"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 rounded-tl-none max-w-[85%]">
+                        <p class="text-gray-800">Hi~ 请选择您要咨询的订单</p>
+                    </div>
+                </div>
+                
+                <!-- 订单列表区域 -->
+                <div class="border-t border-border p-3 max-h-[300px] overflow-y-auto"></div>
+            </div>
+            
+            <!-- 快捷功能区 -->
+            <div class="grid grid-cols-4 gap-3 mb-6">
+                
+                <div class="flex flex-col items-center p-3 card-hover rounded-lg">
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mb-2">
+                        <i class="fa fa-file-text-o text-orange-500"></i>
+                    </div>
+                    <span class="text-xs text-gray-700 text-center">查处进度</span>
+                </div>
+                <div class="flex flex-col items-center p-3 card-hover rounded-lg">
+                    <div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center mb-2">
+                        <i class="fa fa-clipboard text-teal-500"></i>
+                    </div>
+                    <span class="text-xs text-gray-700 text-center">报备与反馈</span>
+                </div>   
+                <div class="flex flex-col items-center p-3 card-hover rounded-lg" onclick="openChatWithWelcomeText('优惠套餐购买及使用')">
+                    <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-2">
+                        <i class="fa fa-ticket text-indigo-500"></i>
+                    </div>
+                    <span class="text-xs text-gray-700 text-center">优惠套餐购买及使用</span>
+                </div>
+                
+                <div class="flex flex-col items-center p-3 card-hover rounded-lg" onclick="openChatWithWelcomeText('优惠券无法使用')">
+                    <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center mb-2">
+                        <i class="fa fa-gift text-pink-500"></i>
+                    </div>
+                    <span class="text-xs text-gray-700 text-center">优惠券无法使用</span>
+                </div>
+            </div>
+            
+            <!-- 猜你想问部分 -->
+            <div class="border border-border rounded-lg overflow-hidden bg-white mb-6">
+                <div class="px-4 py-3 bg-gray-50 border-b border-border">
+                    <h2 class="text-gray-800 font-medium">猜你想问</h2>
+                </div>
+                <ul class="divide-y divide-border">
+                    <li class="px-4 py-3 flex justify-between items-center card-hover cursor-pointer" onclick="openChatWithWelcomeText('如何联系司机')">
+                        <span class="text-gray-700">如何联系司机</span>
+                        <i class="fa fa-angle-right text-gray-400"></i>
+                    </li>
+                    <li class="px-4 py-3 flex justify-between items-center card-hover cursor-pointer" onclick="openChatWithWelcomeText('如何开发票')">
+                        <span class="text-gray-700">如何开发票</span>
+                        <i class="fa fa-angle-right text-gray-400"></i>
+                    </li>
+                    <li class="px-4 py-3 flex justify-between items-center card-hover cursor-pointer" onclick="openChatWithWelcomeText('优惠券使用规则')">
+                        <span class="text-gray-700">优惠券使用规则</span>
+                        <i class="fa fa-angle-right text-gray-400"></i>
+                    </li>
+                    <li class="px-4 py-3 flex justify-between items-center card-hover cursor-pointer" onclick="openChatWithWelcomeText('物品遗失怎么办')">
+                        <span class="text-gray-700">物品遗失怎么办</span>
+                        <i class="fa fa-angle-right text-gray-400"></i>
+                    </li>
+                    <li class="px-4 py-3 flex justify-between items-center card-hover cursor-pointer" onclick="openChatWithWelcomeText('如何给司机发感谢红包')">
+                        <span class="text-gray-700">如何给司机发感谢红包</span>
+                        <i class="fa fa-angle-right text-gray-400"></i>
+                    </li>
+                </ul>
+                <div class="px-4 py-3 flex justify-center">
+                    <button class="text-primary flex items-center text-sm">
+                        <i class="fa fa-refresh mr-1"></i>
+                        <span>换一换</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 处理进度查询 -->
+            <div class="border border-border rounded-lg overflow-hidden bg-white mb-6">
+                <div class="px-4 py-3 flex justify-between items-center card-hover cursor-pointer" onclick="openChat()">
+                    <div class="flex items-center">
+                        <i class="fa fa-search text-primary mr-2"></i>
+                        <span class="text-gray-700">处理进度查询</span>
+                    </div>
+                    <i class="fa fa-angle-right text-gray-400"></i>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 底部按钮 -->
+        <footer class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-border p-4">
+            <div class="flex gap-3">
+                <button class="flex-1 bg-primary text-white py-3 rounded-lg font-medium flex items-center justify-center" onclick="callHotline()">
+                    <i class="fa fa-phone mr-2"></i>
+                    热线客服
+                </button>
+                <button class="flex-1 bg-green-500 text-white py-3 rounded-lg font-medium flex items-center justify-center" onclick="openChat()">
+                    <i class="fa fa-comments mr-2"></i>
+                    在线客服
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 订单数据
+        const orderData = {
+            "status": 200,
+            "message": "OK",
+            "result": {
+                "pageIndex": 1,
+                "pageSize": 10,
+                "list": [
+                    {
+                        "title": "特惠快车",
+                        "time": "2025年08月05日 19:10",
+                        "number": "¥71.8",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "特惠",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "orange",
+                                "border": "1px solid orange"
+                            }
+                        },
+                        "extraInfoArr": [
+                            {
+                                "name": "起点",
+                                "value": "广东小天才科技有限公司 - 南 1 门"
+                            },
+                            {
+                                "name": "终点",
+                                "value": "讯美科技广场"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "经济型",
+                        "time": "2025年07月30日 17:03",
+                        "number": "¥57.28",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "经济型",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "green",
+                                "border": "1px solid green"
+                            }
+                        },
+                        "extraInfoArr": [
+                            {
+                                "name": "起点",
+                                "value": "T3 - 1F - 网约乘车点 B 区 (室内)"
+                            },
+                            {
+                                "name": "终点",
+                                "value": "广东省深圳市南山区科华路 7 号"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "火箭经济型",
+                        "time": "2025年07月18日 15:40",
+                        "number": "¥75.6",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "经济型",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "green",
+                                "border": "1px solid green"
+                            }
+                        },
+                        "extraInfoArr": [
+                            {
+                                "name": "起点",
+                                "value": "万年花城万芳园一区（西门）"
+                            },
+                            {
+                                "name": "终点",
+                                "value": "三一产业园"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "特惠快车",
+                        "time": "2025年06月29日 01:55",
+                        "number": "¥107.90",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "特惠",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "orange",
+                                "border": "1px solid orange"
+                            }
+                        },
+                        "extraInfoArr": [
+                            {
+                                "name": "起点",
+                                "value": "大族广场 - 北门"
+                            },
+                            {
+                                "name": "终点",
+                                "value": "北京大兴国际机场航站楼 - 2F 国内到达"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "出租车",
+                        "time": "2025年05月25日 15:48",
+                        "number": "¥41.00",
+                        "status": "已完成",
+                        "tag": {
+                            "text": "出租车",
+                            "style": {
+                                "fontWeight": "bold",
+                                "color": "blue",
+                                "border": "1px solid blue"
+                            }
+                        },
+                        "extraInfoArr": [
+                            {
+                                "name": "起点",
+                                "value": "全季酒店 (苏州石湖东路店)"
+                            },
+                            {
+                                "name": "终点",
+                                "value": "添可智能科技有限公司2号门"
+                            }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // 动态生成订单列表
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderListContainer = document.querySelector('.border-t.border-border.p-3.max-h-\\[300px\\].overflow-y-auto');
+            orderListContainer.innerHTML = '';
+
+            orderData.result.list.forEach(order => {
+                const orderCard = document.createElement('div');
+                orderCard.className = 'bg-order rounded-lg p-4 mb-3 card-hover flex flex-col min-h-[160px]';
+
+                // 构建订单卡片内容
+                let orderHtml = `
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center">
+                            <span class="text-xs px-2 py-1 rounded-full mr-2" style="color: ${order.tag.style.color}; border: ${order.tag.style.border}; background-color: ${getTagBgColor(order.tag.style.color)}">${order.tag.text}</span>
+                            <span class="text-gray-500 text-sm">${order.status}</span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-gray-800 font-medium">${order.number}</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-700 space-y-1 flex-grow">
+                        <p class="line-clamp-1">起点：${order.extraInfoArr[0].value}</p>
+                        <p class="line-clamp-1">终点：${order.extraInfoArr[1].value}</p>
+                    </div>
+                    <div class="mt-3 flex justify-between items-center pt-2 border-t border-gray-100">
+                        <span class="text-xs text-gray-500">时间：${order.time}</span>
+                        <button class="bg-primary text-white text-xs px-3 py-2 rounded shadow-md hover:bg-primary/90 whitespace-nowrap" onclick="openOrderChat(${orderData.result.list.indexOf(order)})">发起咨询</button>
+                    </div>
+                `;
+
+                orderCard.innerHTML = orderHtml;
+                orderListContainer.appendChild(orderCard);
+            });
+        });
+
+        // 根据标签文字颜色获取对应的背景色
+        function getTagBgColor(textColor) {
+            switch(textColor) {
+                case 'orange':
+                    return 'rgba(255, 165, 0, 0.1)';
+                case 'green':
+                    return 'rgba(0, 128, 0, 0.1)';
+                case 'blue':
+                    return 'rgba(0, 0, 255, 0.1)';
+                default:
+                    return 'rgba(0, 0, 0, 0.05)';
+            }
+        }
+
+        // 跳转在线客服（通用）
+        function openChat() {
+            window.open('https://webchat-bj.clink.cn/chat.html?accessId=b3c2d9e5-6bbd-4cf5-8836-c72317c6f466&language=zh_CN', '_blank');
+        }
+
+        // 唤起热线客服
+        function callHotline() {
+            window.location.href = 'tel:4000000999';
+        }
+
+        // 打开特定订单的聊天窗口
+        function openOrderChat(orderIndex) {
+        const order = orderData.result.list[orderIndex];
+
+    // 根据订单号判断司机/乘客
+    let accessId, visitorExtraInfo;
+    if (order.number === "DDH0001-1" || order.number === "DDH001-3") {
+        accessId = '50884394-e251-4776-be0d-c2c47cbc01b1';
+        visitorExtraInfo = { "type": "司机" };
+    } else {
+        accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
+        visitorExtraInfo = { "type": "乘客" };
+    }
+
+    // 构建商品卡片
+    const linkCard = {
+        "autoSendOnSessionStart": 1,
+        "productList": [
+            {
+                "title": order.title,
+                "subtitle": `${order.extraInfoArr[0].value} 到 ${order.extraInfoArr[1].value}`,
+                "remark": `订单状态: ${order.status}`,
+                "amount": "1单",
+                "price": order.number,
+                "img": "https://android-artworks.25pp.com/fs08/2025/03/18/1/110_40c41e677ca9a8e6b2278e19836c8255_con.png",
+                "imgTag": order.tag.text,
+                "agentNavigateTabName": "订单详情",
+                "appId": "wx1234567890abcdef",
+                "pagePath": "/pages/order/detail",
+                "status": order.status
+            }
+        ]
+    };
+
+    const path = 'https://webchat-bj.clink.cn/chat.html';
+    const URL = `${path}?accessId=${accessId}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
+    
+    window.open(URL, '_blank');
+}
+
+        
+        // 打开带欢迎文本的聊天窗口
+
+     function openChatWithWelcomeText(welcomeText) {
+            const path = 'https://webchat-bj.clink.cn/chat.html';
+            const accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
+            const visitorExtraInfo = {
+                "type": "乘客"
+            };
+
+            const replyWelcome = welcomeText;
+            const sendBase64Image = "1";
+            
+            // 对所有参数进行URL编码
+            const encodedAccessId = encodeURIComponent(accessId);
+            const encodedReplyWelcome = encodeURIComponent(replyWelcome);
+            const encodedSendBase64Image = encodeURIComponent(sendBase64Image);
+            const encodedVisitorExtraInfo = encodeURIComponent(JSON.stringify(visitorExtraInfo));
+            
+            // 构建完整URL
+            const URL = `${path}?accessId=${encodedAccessId}&replyWelcome=${encodedReplyWelcome}&sendBase64Image=${encodedSendBase64Image}&visitorExtraInfo=${encodedVisitorExtraInfo}`;
+            
+            window.open(URL, '_blank');
+
+}
+
+    </script>
+
+    <style>
+        /* 添加自定义样式确保文本截断 */
+        .line-clamp-1 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* 确保按钮在小屏幕上也能正常显示 */
+        @media (max-width: 360px) {
+            .max-w-md {
+                max-width: 100%;
+            }
+            
+            .grid-cols-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</body>
+</html>
