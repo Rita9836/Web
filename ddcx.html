@@ -175,137 +175,146 @@
     </div>
 
     <script>
-        // 订单数据
-        const orderData = {
-            "status": 200,
-            "message": "OK",
-            "result": {
-                "pageIndex": 1,
-                "pageSize": 10,
-                "list": [
-                    {
-                        "title": "特惠快车",
-                        "time": "2025年08月05日 19:10",
-                        "number": "¥71.8",
-                        "status": "已完成",
-                        "tag": {
-                            "text": "特惠",
-                            "style": {
-                                "fontWeight": "bold",
-                                "color": "orange",
-                                "border": "1px solid orange"
-                            }
-                        },
-                        "extraInfoArr": [
-                            {
-                                "name": "起点",
-                                "value": "广东小天才科技有限公司 - 南 1 门"
-                            },
-                            {
-                                "name": "终点",
-                                "value": "讯美科技广场"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "经济型",
-                        "time": "2025年07月30日 17:03",
-                        "number": "¥57.28",
-                        "status": "已完成",
-                        "tag": {
-                            "text": "经济型",
-                            "style": {
-                                "fontWeight": "bold",
-                                "color": "green",
-                                "border": "1px solid green"
-                            }
-                        },
-                        "extraInfoArr": [
-                            {
-                                "name": "起点",
-                                "value": "T3 - 1F - 网约乘车点 B 区 (室内)"
-                            },
-                            {
-                                "name": "终点",
-                                "value": "广东省深圳市南山区科华路 7 号"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "火箭经济型",
-                        "time": "2025年07月18日 15:40",
-                        "number": "¥75.6",
-                        "status": "已完成",
-                        "tag": {
-                            "text": "经济型",
-                            "style": {
-                                "fontWeight": "bold",
-                                "color": "green",
-                                "border": "1px solid green"
-                            }
-                        },
-                        "extraInfoArr": [
-                            {
-                                "name": "起点",
-                                "value": "万年花城万芳园一区（西门）"
-                            },
-                            {
-                                "name": "终点",
-                                "value": "三一产业园"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "特惠快车",
-                        "time": "2025年06月29日 01:55",
-                        "number": "¥107.90",
-                        "status": "已完成",
-                        "tag": {
-                            "text": "特惠",
-                            "style": {
-                                "fontWeight": "bold",
-                                "color": "orange",
-                                "border": "1px solid orange"
-                            }
-                        },
-                        "extraInfoArr": [
-                            {
-                                "name": "起点",
-                                "value": "大族广场 - 北门"
-                            },
-                            {
-                                "name": "终点",
-                                "value": "北京大兴国际机场航站楼 - 2F 国内到达"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "出租车",
-                        "time": "2025年05月25日 15:48",
-                        "number": "¥41.00",
-                        "status": "已完成",
-                        "tag": {
-                            "text": "出租车",
-                            "style": {
-                                "fontWeight": "bold",
-                                "color": "blue",
-                                "border": "1px solid blue"
-                            }
-                        },
-                        "extraInfoArr": [
-                            {
-                                "name": "起点",
-                                "value": "全季酒店 (苏州石湖东路店)"
-                            },
-                            {
-                                "name": "终点",
-                                "value": "添可智能科技有限公司2号门"
-                            }
-                        ]
+       const orderData = {
+    "status": 200,
+    "message": "OK",
+    "result": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "list": [
+            {
+                "title": "特惠快车",
+                "time": "2025年08月05日 19:10",
+                "number": "¥71.8",
+                "status": "已完成",
+                "tag": {
+                    "text": "特惠",
+                    "style": {
+                        "fontWeight": "bold",
+                        "color": "orange",
+                        "border": "1px solid orange"
                     }
-                ]
+                },
+                "extraInfoArr": [
+                    {
+                        "name": "起点",
+                        "value": "广东小天才科技有限公司 - 南 1 门"
+                    },
+                    {
+                        "name": "终点",
+                        "value": "讯美科技广场"
+                    }
+                ],
+                // 补充 orderNo 字段
+                "orderNo": "DDH0001-1"
+            },
+            {
+                "title": "经济型",
+                "time": "2025年07月30日 17:03",
+                "number": "¥57.28",
+                "status": "已完成",
+                "tag": {
+                    "text": "经济型",
+                    "style": {
+                        "fontWeight": "bold",
+                        "color": "green",
+                        "border": "1px solid green"
+                    }
+                },
+                "extraInfoArr": [
+                    {
+                        "name": "起点",
+                        "value": "T3 - 1F - 网约乘车点 B 区 (室内)"
+                    },
+                    {
+                        "name": "终点",
+                        "value": "广东省深圳市南山区科华路 7 号"
+                    }
+                ],
+                // 补充 orderNo 字段
+                "orderNo": "DDH0001-3"
+            },
+            {
+                "title": "火箭经济型",
+                "time": "2025年07月18日 15:40",
+                "number": "¥75.6",
+                "status": "已完成",
+                "tag": {
+                    "text": "经济型",
+                    "style": {
+                        "fontWeight": "bold",
+                        "color": "green",
+                        "border": "1px solid green"
+                    }
+                },
+                "extraInfoArr": [
+                    {
+                        "name": "起点",
+                        "value": "万年花城万芳园一区（西门）"
+                    },
+                    {
+                        "name": "终点",
+                        "value": "三一产业园"
+                    }
+                ],
+                // 补充 orderNo 字段
+                "orderNo": "DDH0003-2"
+            },
+            {
+                "title": "特惠快车",
+                "time": "2025年06月29日 01:55",
+                "number": "¥107.90",
+                "status": "已完成",
+                "tag": {
+                    "text": "特惠",
+                    "style": {
+                        "fontWeight": "bold",
+                        "color": "orange",
+                        "border": "1px solid orange"
+                    }
+                },
+                "extraInfoArr": [
+                    {
+                        "name": "起点",
+                        "value": "大族广场 - 北门"
+                    },
+                    {
+                        "name": "终点",
+                        "value": "北京大兴国际机场航站楼 - 2F 国内到达"
+                    }
+                ],
+                // 补充 orderNo 字段
+                "orderNo": "DDH0003-4"
+            },
+            {
+                "title": "出租车",
+                "time": "2025年05月25日 15:48",
+                "number": "¥41.00",
+                "status": "已完成",
+                "tag": {
+                    "text": "出租车",
+                    "style": {
+                        "fontWeight": "bold",
+                        "color": "blue",
+                        "border": "1px solid blue"
+                    }
+                },
+                "extraInfoArr": [
+                    {
+                        "name": "起点",
+                        "value": "全季酒店 (苏州石湖东路店)"
+                    },
+                    {
+                        "name": "终点",
+                        "value": "添可智能科技有限公司2号门"
+                    }
+                ],
+                // 补充 orderNo 字段
+                "orderNo": "DDH0002-1"
             }
-        };
+        ]
+    }
+};
 
         // 动态生成订单列表
         document.addEventListener('DOMContentLoaded', function() {
@@ -370,40 +379,41 @@
         function openOrderChat(orderIndex) {
         const order = orderData.result.list[orderIndex];
 
-    // 根据订单号判断司机/乘客
-    let accessId, visitorExtraInfo;
-    if (order.number === "DDH0001-1" || order.number === "DDH001-3") {
-        accessId = '50884394-e251-4776-be0d-c2c47cbc01b1';
-        visitorExtraInfo = { "type": "司机" };
-    } else {
-        accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
-        visitorExtraInfo = { "type": "乘客" };
-    }
+// 根据订单号判断司机/乘客
+let accessId, visitorExtraInfo;
+if (order.orderNo === "DDH0001-1" || order.orderNo === "DDH0001-3") {
+    accessId = '50884394-e251-4776-be0d-c2c47cbc01b1';
+    visitorExtraInfo = { "type": "司机" };
+} else {
+    accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
+    visitorExtraInfo = { "type": "乘客" };
+}
 
-    // 构建商品卡片
-    const linkCard = {
-        "autoSendOnSessionStart": 1,
-        "productList": [
-            {
-                "title": order.title,
-                "subtitle": `${order.extraInfoArr[0].value} 到 ${order.extraInfoArr[1].value}`,
-                "remark": `订单状态: ${order.status}`,
-                "amount": "1单",
-                "price": order.number,
-                "img": "https://android-artworks.25pp.com/fs08/2025/03/18/1/110_40c41e677ca9a8e6b2278e19836c8255_con.png",
-                "imgTag": order.tag.text,
-                "agentNavigateTabName": "订单详情",
-                "appId": "wx1234567890abcdef",
-                "pagePath": "/pages/order/detail",
-                "status": order.status
-            }
-        ]
-    };
+// 构建商品卡片
+const linkCard = {
+    "autoSendOnSessionStart": 1,
+    "productList": [
+        {
+            "title": order.title,
+            "subtitle": `${order.extraInfoArr[0].value} 到 ${order.extraInfoArr[1].value}`,
+            "remark": `订单状态: ${order.status}`,
+            "amount": "1单",
+            "price": order.number,
+            "img": "https://android-artworks.25pp.com/fs08/2025/03/18/1/110_40c41e677ca9a8e6b2278e19836c8255_con.png",
+            "imgTag": order.tag.text,
+            "agentNavigateTabName": "订单详情",
+            "appId": "wx1234567890abcdef",
+            "pagePath": "/pages/order/detail",
+            "status": order.status,
+            "orderNo": order.orderNo  // 补充orderNo字段，随商品卡片返回
+        }
+    ]
+};
 
-    const path = 'https://webchat-bj.clink.cn/chat.html';
-    const URL = `${path}?accessId=${accessId}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
-    
-    window.open(URL, '_blank');
+const path = 'https://webchat-bj.clink.cn/chat.html';
+const URL = `${path}?accessId=${accessId}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
+
+window.open(URL, '_blank');
 }
 
         
