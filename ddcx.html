@@ -355,7 +355,7 @@
 
         // 跳转在线客服（通用）
         function openChat() {
-            window.open('https://webchat-bj.clink.cn/chat.html?accessId=b3c2d9e5-6bbd-4cf5-8836-c72317c6f466&language=zh_CN', '_blank');
+            window.open('https://webchat-bj.clink.cn/chat.html?accessId=b3c2d9e5-6bbd-4cf5-8836-c72317c6f466&visitorName=%e5%b0%8f%e5%bc%a0&tel=18102029836&language=zh_CN', '_blank');
         }
 
         // 唤起热线客服
@@ -369,10 +369,20 @@
             let accessId, visitorExtraInfo;
             if (order.orderNo === "DDH0001-1" || order.orderNo === "DDH0001-3") {
                 accessId = '50884394-e251-4776-be0d-c2c47cbc01b1';
-                visitorExtraInfo = { "type": "司机" };
+                visitorName="小李";
+                tel= "13522606550"
+                visitorExtraInfo = 
+                { "type": "司机" ,
+                "tel": "13522606550"
+                };
             } else {
                 accessId = 'e62dd4e3-17d8-433a-b9a3-ad62df0f83c3';
-                visitorExtraInfo = { "type": "乘客" };
+                visitorName="小姚";
+                tel= "18102029836"
+                visitorExtraInfo = 
+                { "type": "乘客" ,
+                "tel":"18102029836"
+                };
             }
 
             const linkCard = {
@@ -396,7 +406,7 @@
             };
 
             const path = 'https://webchat-bj.clink.cn/chat.html';
-            const URL = `${path}?accessId=${accessId}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
+            const URL = `${path}?accessId=${accessId}&visitorName=${encodeURIComponent(visitorName)}&tel=${encodeURIComponent(tel)}&linkCard=${encodeURIComponent(JSON.stringify(linkCard))}&visitorExtraInfo=${encodeURIComponent(JSON.stringify(visitorExtraInfo))}`;
             window.open(URL, '_blank');
         }
 
